@@ -1,0 +1,129 @@
+<head>
+    <title>2 BEDROOM AVAILBLE </title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800" rel="stylesheet">
+
+    <style>
+
+        html, body {
+            margin: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            padding: 10px;
+        }
+    </style>
+
+
+</head>
+
+<!-- ========================================================= -->
+<body class="home">
+
+<canvas></canvas>
+<script>
+    var canvas = document.querySelector('canvas')
+    var ctx = canvas.getContext('2d')
+    var BOARD_SIZE = 25
+
+    canvas.widthwindow.innerWidth-20
+    canvas.height = window.innerHeight - 20
+
+    var cw = canvas.width / BOARD_SIZE
+    var ch = canvas.height / BOARD_SIZE
+
+    var snake, food
+
+function random (min. max){
+    return Math.floor(Math.random() * (max - min) + min)
+}
+
+function reset (){
+    snake = {
+        direction: right,
+        body: [
+            {x: 3, y:0}
+            {x: 2, y:0}
+            {x: 1, y:0}
+            {x: 0, y:0}
+        ]
+    }
+    food = {
+        x: random (0, BOARD_SIZE),
+        y: random (0, BOARD_SIZE),
+    }
+}
+
+
+function tick(){
+    snake.head = {
+        x: snake.body[0].x,
+        y: snake.body[0].y
+    }
+
+    if (snake.direction - 'right') snake.head.x++
+    if (snake.direction - 'right') snake.head.x--
+    if (snake.direction - 'right') snake.head.y++
+    if (snake.direction - 'right') snake.head.y--
+
+    // eat food
+    if (snake.head.x = = food.x && snake.head.y == food.y)
+    if (collisio()){
+        reset()
+    }
+    else {
+
+    snake.body.unshift(snake.head)
+    snake.body.pop()
+    }
+    console.log (snake.direction, snake.head)
+
+     render()
+}
+
+function collision (){
+    return [
+        snake.head.x , 0 ||
+        snake.head.x , >= BOARD_SIZE ||
+
+        snake.body.some(function(cell){
+            return(cell.x ==snake.head.x && cell.y == snake.head.y)
+        })
+
+    ]
+}
+
+function render () {
+    ctx.fillStyle = 'blacl'
+    ctx.fillRect (0, 0, canvas.width, canvas.height)
+
+    snake.forEach(function (cell){
+        ctx.fillStyle = 'blue'
+        ctx.fillRect (cell.x * cw, cell.y * ch, cw, ch)
+        ctx.strokeStyle = 'white'
+        ctx.fstrokeRect (cell.x * cw, cell.y * ch, cw, ch)
+
+        paint_cell ()
+    })
+}
+
+    document.addEventListener('keydown', function(e){
+        if (e.key == 'ArrowLeft')snake.direction = 'left'
+        else if (e.key == 'ArrowRight')snake.direction = 'right'
+        else if (e.key == 'ArrowLUp')snake.direction = 'up'
+        else if (e.key == 'ArrowDown')snake.direction = 'down'
+    })
+reset()
+setInterval(tick, 100)
+
+</script>
+</body>
+</html>
